@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Core - Build and Buy PC Components</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Combined Auth Modal with Toggle -->
+    <div class="modal fade" id="authModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">
+                        <i class="fas fa-user"></i> <span id="modalTitleText">Login to Your Account</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Toggle Switch -->
+                    <div class="form-toggle text-center mb-3">
+                        <div class="toggle-switch d-inline-block">
+                            <input type="checkbox" id="authToggle" class="toggle-checkbox">
+                            <label for="authToggle" class="toggle-label">
+                                <span class="login-text">Login</span>
+                                <span class="signup-text">Sign Up</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form class="login-form" id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label"><i
+                                    class="fas fa-user-circle me-2"></i>Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="Enter your username"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label"><i class="fas fa-lock me-2"></i>Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password"
+                                required>
+                            <div class="form-text text-end"><a href="#"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;">Forgot
+                                    password?</a></div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label small" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </button>
+
+                        <!-- Social Login -->
+                        <div class="text-center my-3">
+                            <p class="text-muted small mb-2">or login with</p>
+                            <div class="d-flex justify-content-center">
+
+                                <a href="#" class="btn btn-sm btn-outline-primary mx-2"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;"><i
+                                        class="fab fa-facebook-f"></i></a>
+
+                                <a href="#" class="btn btn-sm btn-outline-danger mx-2"><i class="fab fa-google"
+                                        onclick="alert('This feature is not available right now. We are working on it!'); return false;"></i></a>
+
+                                <a href="#" class="btn btn-sm btn-outline-dark mx-2"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;"><i
+                                        class="fab fa-apple"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Seller Option -->
+                        <div class="text-center mt-4">
+                            <small class="mt-2 d-block">Want to sell products? <a href="#"
+                                    class="goToSellerSignup">Become
+                                    a Seller</a></small>
+                        </div>
+                    </form>
+
+                    <!-- Signup Form (initially hidden) -->
+                    <form class="signup-form" id="signupForm" style="display: none;">
+                        <div class="mb-3">
+                            <label for="newUsername" class="form-label"><i
+                                    class="fas fa-user-circle me-2"></i>Username</label>
+                            <input type="text" class="form-control" id="newUsername" placeholder="Choose a username"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newEmail" class="form-label"><i class="fas fa-envelope me-2"></i>Email</label>
+                            <input type="email" class="form-control" id="newEmail" placeholder="Enter your email"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label"><i class="fas fa-lock me-2"></i>Password</label>
+                            <input type="password" class="form-control" id="newPassword" placeholder="Create a password"
+                                required>
+                            <div class="form-text small">Min 8 characters</div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                            <label class="form-check-label small" for="termsCheck">
+                                I agree to the <a href="#"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;">Terms</a>
+                                and <a href="#"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;">Privacy
+                                    Policy</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-user-plus me-2"></i>Create Account
+                        </button>
+
+                        <!-- Social Signup -->
+                        <div class="text-center my-3">
+                            <p class="text-muted small mb-2">or sign up with</p>
+                            <div class="d-flex justify-content-center">
+
+                                <a href="#" class="btn btn-sm btn-outline-primary mx-2"><i class="fab fa-facebook-f"
+                                        onclick="alert('This feature is not available right now. We are working on it!'); return false;"></i></a>
+
+                                <a href="#" class="btn btn-sm btn-outline-danger mx-2"><i class="fab fa-google"
+                                        onclick="alert('This feature is not available right now. We are working on it!'); return false;"></i></a>
+
+                                <a href="#" class="btn btn-sm btn-outline-dark mx-2"><i class="fab fa-apple"
+                                        onclick="alert('This feature is not available right now. We are working on it!'); return false;"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Seller Option -->
+                        <div class="text-center mt-4">
+                            <small class="mt-2 d-block">Want to sell products? <a href="#"
+                                    class="goToSellerSignup">Become
+                                    a Seller</a></small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seller Modal -->
+    <div class="modal fade" id="sellerModal" tabindex="-1" aria-labelledby="sellerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sellerModalLabel"><i class="fas fa-store"></i> Seller Portal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Toggle buttons -->
+                    <div class="seller-toggle form-toggle text-center mb-3">
+                        <div class="toggle-switch d-inline-block">
+                            <input type="checkbox" id="sellerAuthToggle" class="toggle-checkbox">
+                            <label for="sellerAuthToggle" class="toggle-label">
+                                <span class="login-text active" id="sellerLoginSpan">Login</span>
+                                <span class="signup-text" id="sellerSignupSpan">Sign Up</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- <button class="active" id="sellerLoginBtn">Login</button>
+                        <button id="sellerSignupBtn">Create Account</button> -->
+
+
+                    <!-- Seller Login Form -->
+                    <form id="sellerLoginForm" class="seller-form">
+                        <div class="mb-3">
+                            <label for="sellerLoginUsername" class="form-label"><i
+                                    class="fas fa-user-tag me-2"></i>Username</label>
+                            <input type="text" class="form-control" id="sellerLoginUsername"
+                                placeholder="Enter your username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sellerLoginPassword" class="form-label"><i
+                                    class="fas fa-lock me-2"></i>Password</label>
+                            <input type="password" class="form-control" id="sellerLoginPassword"
+                                placeholder="Enter your password" required>
+                            <div class="form-text text-end"><a href="#"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;">Forgot
+                                    password?</a></div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="sellerRememberMe">
+                            <label class="form-check-label small" for="sellerRememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login to Seller Portal
+                        </button>
+
+                        <div class="text-center mt-4">
+                            <small class="mt-2 d-block">
+                                New here? <button type="button" class="btn btn-link p-0 m-0"
+                                    id="goToCustomerSignup2">Sign up</button> or
+                                <button type="button" class="btn btn-link p-0 m-0"
+                                    id="goToCustomerLogin2">Login</button> as Customer.
+                            </small>
+                        </div>
+                    </form>
+
+                    <!-- Seller Sign Up Form -->
+                    <form id="sellerSignupForm" class="seller-form d-none">
+                        <div class="mb-3">
+                            <label for="signupName" class="form-label"><i class="fas fa-user me-2"></i>Full Name</label>
+                            <input type="text" class="form-control" id="signupName" placeholder="Enter your full name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label"><i
+                                    class="fas fa-envelope me-2"></i>Email</label>
+                            <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="shopName" class="form-label"><i class="fas fa-store me-2"></i>Shop Name</label>
+                            <input type="text" class="form-control" id="shopName" placeholder="Enter your shop name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupUsername" class="form-label"><i
+                                    class="fas fa-user-tag me-2"></i>Username</label>
+                            <input type="text" class="form-control" id="signupUsername" placeholder="Choose a username"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label"><i
+                                    class="fas fa-lock me-2"></i>Password</label>
+                            <input type="password" class="form-control" id="signupPassword"
+                                placeholder="Create a password" required>
+                            <div class="form-text small">Min 8 characters</div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="sellerTermsCheck" required>
+                            <label class="form-check-label small" for="sellerTermsCheck">
+                                I agree to the <a href="#"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;">Seller
+                                    Terms</a> and <a href="#"
+                                    onclick="alert('This feature is not available right now. We are working on it!'); return false;">Privacy
+                                    Policy</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-store me-2"></i>Create Seller Account
+                        </button>
+
+                        <div class="text-center mt-4">
+                            <small class="mt-2 d-block">
+                                New here? <button type="button" class="btn btn-link p-0 m-0"
+                                    id="goToCustomerSignup">Sign up</button> or
+                                <button type="button" class="btn btn-link p-0 m-0" id="goToCustomerLogin">Login</button>
+                                as Customer.
+                            </small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buy Now Modal -->
+    <div class="modal fade" id="buyNowModal" tabindex="-1" aria-labelledby="buyNowModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buyNowModalLabel"><i class="fas fa-shopping-cart"></i> Confirm Your
+                        Purchase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>Order Summary</h4>
+                    <p><strong>Product:</strong> <span id="modalProductName"></span></p>
+                    <p><strong>Price:</strong> ₹<span id="modalProductPrice"></span></p>
+                    <!-- Quantity Selector -->
+                    <div class="quantity-selector">
+                        <button id="decreaseQuantity" class="btn btn-outline-secondary">-</button>
+                        <input type="text" id="quantity" value="1" readonly>
+                        <button id="increaseQuantity" class="btn btn-outline-secondary">+</button>
+                    </div>
+                    <p><strong>Total Price:</strong> ₹<span id="totalPrice"></span></p>
+                    <!-- Checkout Form -->
+                    <form id="orderForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Name Surname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="youremail@example.com"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Shipping Address</label>
+                            <textarea class="form-control" id="address" rows="3"
+                                placeholder="123 Main Street, City, Country" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="paymentMethod" class="form-label">Payment Method</label>
+                            <select class="form-control" id="paymentMethod" required>
+                                <option>Credit Card</option>
+                                <option>Debit Card</option>
+                                <option>Net Banking</option>
+                                <option>UPI</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="placeOrderButton">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div id="cartItems">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-summary-row">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">₹0</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Shipping:</span>
+                <span>₹499</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>Tax:</span>
+                <span id="cartTax">₹0</span>
+            </div>
+            <div class="cart-summary-row">
+                <span class="cart-total">Total:</span>
+                <span class="cart-total" id="cartTotal">₹0</span>
+            </div>
+            <button class="checkout-btn"
+                onclick="alert('This feature is not available right now. We are working on it!'); return false;">Proceed
+                to Checkout</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Success toast notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+            <div class="toast-header bg-success text-white">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="successToastMessage">
+                You've successfully logged in!
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Navbar -->
+    <nav class="navbar navbar-expand-lg custom-navbar sticky-top desktop-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#"><span><i class="fas fa-gamepad"></i> Custom</span> Core</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link custom-dropdown-toggle" href="javascript:void(0)" id="productsDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products <i class="fas fa-caret-down ms-1"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productsDropdown">
+                            <li><a class="dropdown-item" href="#prebuilt">Pre Built Gaming PCs</a></li>
+                            <li><a class="dropdown-item" href="#parts">PC Parts & Peripherals</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="custom-pc-build.html" target="_blank">Build PC</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                </ul>
+
+                <!-- Desktop actions: Search Box, Cart and Login -->
+                <div class="desktop-actions">
+                    <div class="search-box desktop-search-box me-5">
+                        <input type="text" placeholder="Search products..." id="searchInput"
+                            onkeyup="syncSearchInputs()">
+                        <button class="search-btn" type="button" onclick="searchProducts()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <!-- Cart Button for Desktop -->
+                    <div class="cart-icon desktop-cart-icon me-4 text-white fs-5" id="cartIcon" title="Your Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+
+                    <!-- User Area -->
+                    <div id="userArea">
+                        <!-- Guest user buttons (default) -->
+                        <div id="guestButtons">
+                            <a class="d-flex align-items-center gap-2 btn login" id="loginBtn" href="#"
+                                data-bs-toggle="modal" data-bs-target="#authModal">
+                                <i class="fas fa-user mr-1"></i> Login
+                            </a>
+                        </div>
+
+                        <!-- Logged in user dropdown (initially hidden) -->
+                        <div id="userDropdown" class="user-dropdown d-none">
+                            <button class="user-dropdown-toggle" id="userDropdownToggle">
+                                <span id="usernameDisplay" data-bs-toggle="tooltip" title="Username">Username</span>
+                                <i class="fas fa-chevron-down ml-2"></i>
+                            </button>
+                            <div class="user-dropdown-menu" id="userDropdownMenu">
+                                <a href="#" class="user-dropdown-item" onclick="alert('This feature is not available right now. We are working on it!'); return false;">
+                                    <i class="fas fa-user-circle"></i>My Profile
+                                </a>
+                                <a href="#" class="user-dropdown-item" onclick="alert('This feature is not available right now. We are working on it!'); return false;">
+                                    <i class="fas fa-cog"></i>Settings
+                                </a>
+                                <!-- Admin panel link (shown only for sellers) -->
+                                <a href="#" class="user-dropdown-item admin d-none" id="adminPanelLink" onclick="alert('This feature is not available right now. We are working on it!'); return false;">
+                                    <i class="fas fa-store"></i>Admin Panel
+                                </a>
+                                <a href="#" class="user-dropdown-item logout" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i>Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Line 1: Menu, Brand, Login -->
+    <div class="mobile-nav-line-1">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#mobileSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-brand m-0" href="#"><span><i class="fas fa-gamepad"></i> Custom</span> Core</a>
+        </div>
+
+        <!-- User Area for Mobile -->
+        <div id="mobileUserArea">
+            <!-- Guest user buttons (default) -->
+            <div id="mobileGuestButtons">
+                <a class="d-flex align-items-center gap-2 btn login" id="mobileLoginBtn" href="#" data-bs-toggle="modal"
+                    data-bs-target="#authModal">
+                    <i class="fas fa-user"></i>Login
+                </a>
+            </div>
+
+            <!-- Logged in user dropdown (initially hidden) -->
+            <div id="mobileUserDropdown" class="mobile-user-dropdown d-none">
+                <button class="mobile-user-dropdown-toggle" id="mobileUserDropdownToggle">
+                    <span id="mobileUsernameDisplay" data-bs-toggle="tooltip" title="Username">Username</span>
+                    <i class="fas fa-chevron-down ml-1"></i>
+                </button>
+                <div class="mobile-user-dropdown-menu" id="mobileUserDropdownMenu">
+                    <a href="#" class="user-dropdown-item">
+                        <i class="fas fa-user-circle"></i>My Profile
+                    </a>
+                    <a href="#" class="user-dropdown-item">
+                        <i class="fas fa-cog"></i>Settings
+                    </a>
+                    <!-- Admin panel link (shown only for sellers) -->
+                    <a href="#" class="user-dropdown-item admin d-none" id="mobileAdminPanelLink">
+                        <i class="fas fa-store"></i>Admin Panel
+                    </a>
+                    <a href="#" class="user-dropdown-item logout" id="mobileLogoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Line 2: Search, Cart -->
+    <div class="mobile-nav-line-2">
+        <div class="search-box w-100 me-2">
+            <input type="text" placeholder="Search products..." id="mobileSearchInput" onkeyup="syncSearchInputs()">
+            <button class="search-btn" type="button" onclick="searchProducts()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <!-- Cart Button for Mobile -->
+        <div class="cart-icon mobile-cart-icon text-white" id="mobileCartIcon" title="Your Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+        </div>
+    </div>
+
+    <!-- Mobile Scroll Navbar (appears when scrolling down) -->
+    <div class="mobile-scroll-navbar">
+        <button class="btn btn-outline-secondary me-2" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#mobileSidebar">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="search-box w-100 mx-2">
+            <input type="text" placeholder="Search products..." id="scrollSearchInput" onkeyup="syncSearchInputs()">
+            <button class="search-btn" type="button" onclick="searchProducts()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <!-- Cart Button for Mobile Scroll -->
+        <div class="cart-icon mobile-cart-icon text-white" id="scrollCartIcon" title="Your Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar with updated attributes -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="mobileSidebarLabel"><span><i class="fas fa-gamepad"></i> Custom</span> Core
+            </h5>
+            <button type="button" class="custom-offcanvas-close" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <!-- Remove data-bs-dismiss from all these links -->
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+
+                <!-- Products dropdown for mobile -->
+                <li class="nav-item mobile-dropdown">
+                    <a class="nav-link custom-mobile-dropdown d-flex align-items-center justify-content-between">
+                        Products
+                        <i class="fas fa-caret-down mobile-dropdown-toggle"></i>
+                    </a>
+                    <ul class="mobile-dropdown-menu">
+                        <li><a class="nav-link" href="#prebuilt">Pre Built Gaming PCs</a></li>
+                        <li><a class="nav-link" href="#parts">PC Parts & Peripherals</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="custom-pc-build.html" target="_blank">Build PC</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- navbar section ends -->
+
+    <section class="hero d-flex align-items-center justify-content-center text-center" id="home">
+        <div class="container home-container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <h1 class="fw-bold display-4"><span>CUSTOM</span> CORE</h1>
+                    <h2 class="fw-medium mb-3">First Month On Us!</h2>
+                    <p class="mb-4">Start your journey to a high-performance custom PC that meets every expectation.</p>
+                    <a href="custom-pc-build.html" class="btn btn-warning px-4 py-2 rounded-pill" target="_blank">
+                        Customize Your PC
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-section py-5" id="prebuilt">
+        <div class="container">
+            <h2 class="section-title text-center mb-3">Custom Core Prebuilt Gaming PCs</h2>
+            <p class="section-description text-center mb-4">We use the latest generation performance components and
+                configurations to
+                get you gaming, fast.</p>
+
+            <!-- Product Controls - Enhanced for Responsiveness -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="controls-wrapper">
+                        <!-- Show All PCs Button -->
+                        <button class="show-all-btn" onclick="loadAllProducts()">
+                            <i class="fas fa-desktop"></i>Show All PCs
+                        </button>
+
+                        <!-- Category Filters -->
+                        <div class="category-filters">
+                            <button type="button" class="btn btn-outline-primary"
+                                onclick="loadProductsByCategory('entry-level')">Entry Level</button>
+                            <button type="button" class="btn btn-outline-primary"
+                                onclick="loadProductsByCategory('mid-range')">Mid-Range</button>
+                            <button type="button" class="btn btn-outline-primary"
+                                onclick="loadProductsByCategory('high-end')">High-End</button>
+                        </div>
+
+                        <!-- Sort Options -->
+                        <div class="dropdown filter-dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="sortDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-sort me-1"></i>Sort By
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="sortProducts('price-low'); return false;">Price: Low to High</a></li>
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="sortProducts('price-high'); return false;">Price: High to Low</a></li>
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="sortProducts('rating'); return false;">Rating</a></li>
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="sortProducts('name'); return false;">Name</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Price Range Filter -->
+                        <div class="dropdown filter-dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="priceDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-rupee-sign me-1"></i>Price Range
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="priceDropdown">
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="loadProductsByPriceRange(0, 125000); return false;">Under ₹1,25,000</a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="loadProductsByPriceRange(125000, 200000); return false;">₹1,25,000 -
+                                        ₹2,00,000</a></li>
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="loadProductsByPriceRange(200000, 1000000); return false;">Above
+                                        ₹2,00,000</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="product-container">
+                <!-- Products will be loaded dynamically here -->
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="heading">About <span>Us</span></h2>
+            </div>
+
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon-box text-center">
+                        <div class="icon-container mb-4">
+                            <div class="hexagon">
+                                <i class="pc-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-title">Premium PC Builds</h3>
+                        <p class="feature-text text-center" style="margin-left: 0em;">Custom-built PCs. Maximum
+                            performance. Zero compromise.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon-box text-center">
+                        <div class="icon-container mb-4">
+                            <div class="hexagon">
+                                <i class="gpu-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-title">Quality Components</h3>
+                        <p class="feature-text text-center" style="margin-left: 0em;">Only the best hardware for your
+                            gaming experience.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon-box text-center">
+                        <div class="icon-container mb-4">
+                            <div class="hexagon">
+                                <i class="support-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-title">Expert Support</h3>
+                        <p class="feature-text text-center" style="margin-left: 0em;">Guidance from PC enthusiasts who
+                            know their craft.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="about-content">
+                        <p>Welcome to <strong>Custom Core</strong>, where passion meets performance in the world of
+                            gaming PCs. We are dedicated to helping enthusiasts and beginners alike build their ultimate
+                            gaming rigs with expert guidance and a curated selection of high-quality components.</p>
+
+                        <p>Our team of professionals is committed to excellence and innovation. Whether you're seeking
+                            the latest GPUs, powerful CPUs, or cutting-edge peripherals, we provide detailed reviews,
+                            tutorials, and recommendations to empower your gaming journey.</p>
+
+                        <p>Join our community of gamers and tech aficionados as we navigate the ever-evolving landscape
+                            of PC gaming hardware together. <strong>Custom Core</strong> is your ultimate destination
+                            for all Gaming Needs (Prebuilt PC, Gaming Consoles, PC Parts, Gaming Accessories). You will
+                            definitely find solutions to all your gaming needs right under one roof with the best
+                            quality & cheapest price like no other.</p>
+
+                        <p>Custom Core is run by <strong>Krunal Rathod</strong>.</p>
+                    </div>
+                    <!-- <div class="morebtn">
+                        <a href="about.html" class="btn"><span>Read More</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="row card-section">
+                <div class="col-md-4 mb-4">
+                    <div class="info-card vision-card">
+                        <h2>Vision</h2>
+                        <ul>
+                            <li>Our vision is to become the ultimate destination for gamers seeking high-performance PC
+                                components, providing unparalleled selection, expert guidance, and a seamless shopping
+                                experience.</li>
+                            <li>To be a global leader in our industry, setting the standards for quality and innovation.
+                            </li>
+                            <li>We aim to be a leader in the custom PC industry, setting benchmarks for quality,
+                                performance, and customer satisfaction.</li>
+                            <li>Our commitment to using only the best components ensures that our builds are not only
+                                powerful but also reliable and long-lasting.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="info-card mission-card">
+                        <h2>Mission</h2>
+                        <ul>
+                            <li>To curate a comprehensive catalog of the latest and most reliable gaming PC parts,
+                                ensuring every gamer finds exactly what they need to build their dream rig.</li>
+                            <li>To empower our customers with in-depth knowledge and support, guiding them through every
+                                step of the PC building process.</li>
+                            <li>To foster a community where gamers can share knowledge, experiences, and innovations,
+                                creating a hub for enthusiasts worldwide.</li>
+                            <li>To deliver exceptional services and solutions that exceed our clients' expectations.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="info-card goals-card">
+                        <h2>Goals</h2>
+                        <ul>
+                            <li>Offer a diverse range of products, from budget-friendly options to premium, cutting-edge
+                                components, catering to gamers of all levels.</li>
+                            <li>Provide exceptional customer service, including timely support, detailed product
+                                information, and reliable shipping.</li>
+                            <li>Establish partnerships with leading brands to guarantee access to the latest technology
+                                and exclusive deals for our customers.</li>
+                            <li>Build a robust online platform that is user-friendly, informative, and interactive,
+                                enhancing the overall shopping experience.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products py-5" id="parts">
+        <div class="container">
+            <h2 class="section-title mb-5">Featured Products</h2>
+
+            <div class="row" id="productsContainer">
+                <!-- Products will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have questions about gaming builds or need advice on components? Reach out to us!</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h3>Gaming Support</h3>
+                            <p>We're here to help with all your gaming PC needs</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>kmrathod5787@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Response Time</h3>
+                            <p>We aim to respond within 24 hours</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/krunal-rathod-20b0882aa/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/kmrathod29_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:kmrathod5787@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select>
+                                <option value="" disabled selected>Select Query Type</option>
+                                <option value="build-advice">PC Build Advice</option>
+                                <option value="component-query">Component Compatibility</option>
+                                <option value="order-support">Order Support</option>
+                                <option value="general">General Question</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" onclick="alert('This feature is not available right now. We are working on it!'); return false;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="footer-title">Custom Core</h5>
+                    <p>Your ultimate destination for all Gaming Needs - Prebuilt PCs, Gaming Consoles, PC Parts, and
+                        Gaming Accessories at the best quality & cheapest price.</p>
+                    <div class="social-links d-flex justify-content-start gap-3">
+                        <a href="https://www.linkedin.com/in/krunal-rathod-20b0882aa/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/kmrathod29_/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="mailto:kmrathod5787@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 quick">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="footer-title">Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="#prebuilt">Prebuilt Gaming PCs</a></li>
+                        <li><a href="#parts">PC Part & Peripherals</a></li>
+                        <li><a href="custom-pc-build.html" target="_blank">Custom Build Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h5 class="footer-title">Contact Us</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-headset me-2"></i> Gaming Support</li>
+                        <li><i class="fas fa-envelope me-2"></i> kmrathod5787@gmail.com </li>
+                        <li><i class="fas fa-user me-2"></i> Run by Krunal Rathod</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Custom Core. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
