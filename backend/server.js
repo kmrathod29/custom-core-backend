@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5500', 
+  origin: 'https://custom-core-backend.onrender.com/#home', 
   credentials: true
 }));
 
