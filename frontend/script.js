@@ -2583,7 +2583,7 @@ document
     const password = document.getElementById("newPassword").value;
 
     try {
-      const res = await fetch("https://custom-core.onrender.com/api/users/register", {
+      const res = await fetch("https://custom-core-backend.onrender.com/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
